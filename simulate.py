@@ -3,7 +3,7 @@ import asyncio
 
 BASE_URL = "http://localhost:8000/api/data"
 TOTAL_USERS = 100
-REQUESTS_PER_USER = 15  # intentionally more than 10 to show blocking
+REQUESTS_PER_USER = 15  
 
 
 async def send_request(client: httpx.AsyncClient, user_id: str, request_num: int) -> None:
