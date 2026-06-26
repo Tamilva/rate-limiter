@@ -1,0 +1,3 @@
+
+RATE_LIMIT = 10
+WINDOW_SIZE = 60  # seconds

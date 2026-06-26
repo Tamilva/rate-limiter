@@ -1,7 +1,13 @@
-from fastapi import FastAPI, Header, HTTPException
+from fastapi import FastAPI, Header
 from app.rate_limiter import check_rate_limit
+from app.config import RATE_LIMIT, WINDOW_SIZE
 
 app = FastAPI(title="Rate Limiter API")
+
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
 
 
 @app.get("/")

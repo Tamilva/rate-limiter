@@ -1,8 +1,6 @@
 from fastapi import HTTPException
 from app.redis_client import redis_client
-
-RATE_LIMIT = 10
-WINDOW_SIZE = 60  # seconds
+from app.config import RATE_LIMIT, WINDOW_SIZE
 
 
 def check_rate_limit(user_id: str) -> None:
@@ -15,7 +13,6 @@ def check_rate_limit(user_id: str) -> None:
             detail=f"Rate limit exceeded for {user_id}. Try again after 1 minute."
         )
 
-    # increment count and set expiry on first request
     pipe = redis_client.pipeline()
     pipe.incr(key)
     pipe.expire(key, WINDOW_SIZE)
