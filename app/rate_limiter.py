@@ -15,5 +15,6 @@ def check_rate_limit(user_id: str) -> None:
 
     pipe = redis_client.pipeline()
     pipe.incr(key)
-    pipe.expire(key, WINDOW_SIZE)
+    if not count:
+        pipe.expire(key, WINDOW_SIZE)
     pipe.execute()
