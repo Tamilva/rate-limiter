@@ -8,17 +8,17 @@ REQUESTS_PER_USER = 15  # intentionally more than 10 to show blocking
 
 async def send_request(client: httpx.AsyncClient, user_id: str, request_num: int) -> None:
     headers = {"user-id": user_id}
-    
+
     try:
         response = await client.get(BASE_URL, headers=headers)
-        
+
         if response.status_code == 200:
-            print(f"user_{user_id} | request_{request_num} | ✅ 200 OK")
+            print(f"user_{user_id} | request_{request_num} | 200 OK - Allowed")
         elif response.status_code == 429:
-            print(f"user_{user_id} | request_{request_num} | ❌ 429 Too Many Requests")
-    
+            print(f"user_{user_id} | request_{request_num} | 429 Too Many Requests - Blocked")
+
     except Exception as e:
-        print(f"user_{user_id} | request_{request_num} | ⚠️ Error: {str(e)}")
+        print(f"user_{user_id} | request_{request_num} | Error: {str(e)}")
 
 
 async def simulate_user(client: httpx.AsyncClient, user_id: str) -> None:
